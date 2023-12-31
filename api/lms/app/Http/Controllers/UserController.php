@@ -49,4 +49,11 @@ class UserController extends Controller
             ]);
         }
     }
+
+    public function getTotalUsersCount(): \Illuminate\Http\JsonResponse
+    {
+        $userCount = User::count();
+
+        return response()->json(['total_users' => $userCount]);
+    }
 }
