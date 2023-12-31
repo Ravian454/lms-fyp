@@ -11,6 +11,7 @@ import {
     MenuList,
     MenuItem,
     Spinner,
+    Divider,
 } from '@chakra-ui/react';
 import {
     FaUser,
@@ -19,6 +20,9 @@ import {
     FaBell,
     FaSearch,
 } from 'react-icons/fa';
+
+import { LiaSwatchbookSolid } from "react-icons/lia";
+import { CiDollar } from "react-icons/ci";
 import { MdOutlineSpaceDashboard } from 'react-icons/md';
 import { TbUsersGroup } from 'react-icons/tb';
 import { PiBooksBold } from 'react-icons/pi';
@@ -37,7 +41,6 @@ const Dashboard = () => {
     const [notifications, setNotifications] = useState(3);
 
     const handleBellClick = () => {
-        // Handle bell icon click (e.g., show notifications or mark them as read)
         console.log('Bell clicked');
     };
 
@@ -72,7 +75,9 @@ const Dashboard = () => {
                         <Spinner ml={4} color="#50a9de" size="md" />
                     ) : (
                         <Text ml={4} fontWeight="bold" color="#50a9de">
-                            {totalUsers}
+                            <Center height='50px'>
+                                <Divider orientation='vertical' m={"20px"}/> {totalUsers}
+                            </Center>
                         </Text>
                     )}
                 </Flex>
@@ -81,6 +86,13 @@ const Dashboard = () => {
     };
 
     return (
+        <Flex
+            as="div"
+            flexDirection="column"
+            height="100vh"
+            overflowY="auto"
+            bg="#f2f2f2"
+        >
         <Flex as="div" flexDirection="column" height="100vh" overflowY="auto">
             <Flex
                 as="header"
@@ -145,7 +157,7 @@ const Dashboard = () => {
                 <Box
                     as="aside"
                     w="250px"
-                    bg="#333"
+                    bg="rgba(0, 0, 0, 0.7)"
                     color="white"
                     m={'20px'}
                     p={4}
@@ -156,7 +168,7 @@ const Dashboard = () => {
                     borderRadius="5px"
                 >
                     {/* Sidebar Content */}
-                    <Text mb={4} fontSize="xl" fontWeight="bold">
+                    <Text mb={4} fontSize="xl" fontWeight="bold" alignItems={"center"}>
                         Teacher's Portal
                     </Text>
                     <hr
@@ -195,15 +207,21 @@ const Dashboard = () => {
                         <TotalUsersCard />
 
                         {/* Card 2 */}
-                        <Box w="300px" p={4} bg="white" borderRadius="md" boxShadow="md">
+                        <Box w="300px" h="100px" p={4} bg="white" borderRadius="md" boxShadow="md">
                             {/* Content for Card 2 */}
-                            <Text>Courses</Text>
+                            <Flex align="center" mb={2} _hover={{ color: 'blue.300', cursor: 'pointer' }}>
+                            <LiaSwatchbookSolid style={{ marginRight: '8px', height: '30px', width: '30px' }}/>
+                            <Text fontWeight="bold" fontFamily="monospace" fontSize="xl">Courses</Text>
+                            </Flex>
                         </Box>
 
                         {/* Card 3 */}
-                        <Box w="300px" p={4} bg="white" borderRadius="md" boxShadow="md">
+                        <Box w="300px" p={4} bg="white" borderRadius="md" boxShadow="lg">
                             {/* Content for Card 3 */}
-                            <Text>Revenue</Text>
+                            <Flex align="center" mb={2} _hover={{ color: 'blue.300', cursor: 'pointer' }}>
+                            <CiDollar style={{ marginRight: '8px', height: '30px', width: '30px' }}/>
+                            <Text fontWeight="bold" fontFamily="monospace" fontSize="xl">Revenue</Text>
+                            </Flex>
                         </Box>
 
                         <Center mt={6} width="900px">
@@ -231,6 +249,7 @@ const Dashboard = () => {
                     </Box>
                 </Flex>
             </Flex>
+        </Flex>
         </Flex>
     );
 };

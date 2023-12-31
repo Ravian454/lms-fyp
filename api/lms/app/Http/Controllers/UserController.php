@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
+use JetBrains\PhpStorm\NoReturn;
 
 class UserController extends Controller
 {
@@ -14,15 +15,18 @@ class UserController extends Controller
     public function register(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|min:6',
+            'isTeacher' => 'required',
+            'name'      => 'required|string',
+            'email'     => 'required|email|unique:users',
+            'password'  => 'required|string|min:6',
+
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'isTeacher' => $request->isTeacher,
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'password'  => Hash::make($request->password),
         ]);
 
         return response()->json(['user' => $user, 'message' => 'User registered successfully']);
@@ -32,8 +36,8 @@ class UserController extends Controller
     public function login(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required|string',
+            'email'     => 'required|email',
+            'password'  => 'required|string',
         ]);
 
         $credentials = $request->only('email', 'password');
@@ -42,7 +46,7 @@ class UserController extends Controller
             $user = Auth::user();
             $token = $user->createToken('authToken')->plainTextToken;
 
-            return response()->json(['user' => $user, 'token' => $token, 'message' => 'Login successful']);
+            return response()->json(['user' => $user->id, 'token' => $token, 'message' => 'Login successful']);
         } else {
             throw ValidationException::withMessages([
                 'email' => ['The provided credentials are incorrect.'],
@@ -55,5 +59,17 @@ class UserController extends Controller
         $userCount = User::count();
 
         return response()->json(['total_users' => $userCount]);
+    }
+
+    public function updateLoggedInStatus($userId, $isLoggedIn): \Illuminate\Http\JsonResponse
+    {
+        $user = User::find($userId);
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        $user->update(['isLoggedIn' => $isLoggedIn]);
+
+        return response()->json(['user' => $user, 'message' => 'Login status updated successfully']);
     }
 }

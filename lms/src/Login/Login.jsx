@@ -66,6 +66,8 @@ const LoginPage = () => {
             if (result.ok) {
                 result = await result.json();
                 localStorage.setItem("user-info", JSON.stringify(result));
+                // console.log("Result is: ",result.user);
+                await updateUserLoginStatus(result.user, 1)
                 // Navigate to the desired page upon successful login
                 navigate('/dashboard');
             } else {
@@ -84,6 +86,25 @@ const LoginPage = () => {
             }
         } catch (error) {
             console.error('Error logging in:', error);
+        }
+    }
+
+    async function updateUserLoginStatus(userId, value) {
+        try {
+            const result = await fetch(`http://127.0.0.1:8000/api/updateLoggedInStatus/${userId}/${value}`, {
+                method: 'PUT',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify({ isLoggedIn: value }),
+            });
+
+            if (!result.ok) {
+                console.error('Error updating user login status');
+            }
+        } catch (error) {
+            console.error('Error updating user login status:', error);
         }
     }
 
@@ -115,13 +136,13 @@ const LoginPage = () => {
                         />
                         <InputRightElement width="4.5rem">
                             <Button h="1.75rem" size="sm" onClick={handleTogglePassword}>
-                                <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                                <FontAwesomeIcon  icon={showPassword ? faEyeSlash : faEye} />
                             </Button>
                         </InputRightElement>
                     </InputGroup>
                     {errors.password && <span className="error">{errors.password}</span>}
 
-                    <Button type="submit" colorScheme="blue" size="md" onClick={login}>
+                    <Button type="submit" colorScheme="teal" size="md" onClick={login}>
                         Login
                     </Button>
                     {apiError && <span className="error">{apiError}</span>}
