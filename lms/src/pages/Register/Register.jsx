@@ -76,6 +76,16 @@ const Register = () => {
     // Reset errors
     setErrors({});
 
+    if (!validateEmail(formData.email)) {
+      setErrors({ email: "Please enter a valid email address." });
+      return;
+    }
+
+    if (formData.password.length < 8) {
+      setErrors({ password: "Password must be at least 8 characters long." });
+      return;
+    }
+
     // Add your registration logic here using formData
     const registrationSuccessful = await register();
 
@@ -83,6 +93,11 @@ const Register = () => {
     if (registrationSuccessful) {
       navigate("/login");
     }
+  };
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
   };
 
   const navigateToLogin = () => {
@@ -143,7 +158,7 @@ const Register = () => {
   const radioGroup = getRootProps();
 
   return (
-    <section className="h-screen w-screen flex items-center justify-center bg-red-500">
+    <section className="h-screen w-screen flex items-center justify-center shadow-2xl">
       
         <Center>
           <Card 
@@ -153,7 +168,7 @@ const Register = () => {
             rounded="md"
           >
             <VStack spacing={4}>
-              <Text fontSize="3xl" fontWeight="bold">
+              <Text fontSize="3xl" fontWeight="bold" fontFamily="monospace">
                 Register
               </Text>
               <form onSubmit={handleSubmit}>
@@ -186,31 +201,32 @@ const Register = () => {
                     <FaEnvelope />
                   </InputLeftAddon>
                   <Input
-                    type="email"
-                    name="email"
-                    className="w-full"
-                    placeholder="Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    isRequired
+                      type="email"
+                      name="email"
+                      className="w-full"
+                      placeholder="Email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      isRequired
                   />
                 </InputGroup>
-
+                {errors.email && <Text color="red.500">{errors.email}</Text>}
                 <InputGroup size="md" className="mt-3">
                   <InputLeftAddon>
                     <FaLock />
                   </InputLeftAddon>
                   <Input
-                    type="password"
-                    name="password"
-                    className="w-full"
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    isRequired
+                      type="password"
+                      name="password"
+                      className="w-full"
+                      placeholder="Password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      isRequired
                   />
                 </InputGroup>
-
+                {/* Display password error */}
+                {errors.password && <Text color="red.500">{errors.password}</Text>}
                 <Button
                   type="submit"
                   colorScheme="teal"
@@ -228,7 +244,7 @@ const Register = () => {
               <Text>
                 Already have an account?{" "}
                 <ChakraLink as={Link} to="/login">
-                  <span className=" text-teal-800 font-bold text-lg">
+                  <span className=" text-teal-800 font-bold text-lg font-mono">
                     Login
                   </span>
                 </ChakraLink>

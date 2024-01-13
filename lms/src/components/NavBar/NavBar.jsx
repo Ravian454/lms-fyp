@@ -20,19 +20,12 @@ function Navbar() {
 
   return (
       <div>
-        <div className="flex justify-between items-center fixed top-0 w-full bg-white border-b py-3 px-6 z-20">
+        <div className="flex justify-between font-sans items-center fixed top-0 w-full bg-white border-b py-3 px-6 z-20">
           <div className="flex">
-            <h2>DashBoard</h2>
+            <h2>Teacher's DashBoard</h2>
           </div>
 
           <div className="relative">
-            <div
-                className="lg:hidden cursor-pointer p-2 ml-[400px]"
-                onClick={toggleMenu}
-            >
-              <FontAwesomeIcon icon={faBars} className="text-gray-400" />
-            </div>
-
             <div className="flex items-center relative">
               <FontAwesomeIcon
                   icon={faBell}

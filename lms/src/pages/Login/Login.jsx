@@ -50,9 +50,6 @@ const LoginPage = () => {
         password: !formData.password ? "Password is required" : "",
       });
     }
-
-    // Perform login logic
-    // login();
   };
 
   async function login() {
@@ -74,21 +71,15 @@ const LoginPage = () => {
       if (result.ok) {
         result = await result.json();
         localStorage.setItem("user-info", JSON.stringify(result));
-        // console.log("Result is: ",result.user);
         await updateUserLoginStatus(result.user, 1);
-        // Navigate to the desired page upon successful login
-        navigate("/dashboard");
+        navigate("/");
       } else {
-        // Handle incorrect credentials
-        const errorData = await result.json(); // Assuming the server returns JSON error details
+        const errorData = await result.json();
 
         if (errorData && errorData.errors) {
-          // Extract and handle specific validation errors
           console.error("Validation errors:", errorData.errors);
-          // Update state with validation errors
           setErrors(errorData.errors);
         } else {
-          // Handle other types of errors
           setApiError("Invalid username or password");
         }
       }
@@ -120,10 +111,10 @@ const LoginPage = () => {
   }
 
   return (
-    <section className="h-screen w-screen flex items-center justify-center bg-red-500">
-      <div className="card-container ">
+    <section className="h-screen w-screen flex items-center justify-center">
+      <div className="card-container shadow-xl">
         <div className="card w-80 p-6">
-          <h1 className="text-center pb-3">Login</h1>
+          <h1 className="text-center pb-3 font-mono">Login</h1>
           <form onSubmit={handleSubmit}>
             <InputGroup mb="16px">
               <InputLeftAddon>
@@ -166,16 +157,16 @@ const LoginPage = () => {
               type="submit"
               colorScheme="teal"
               size="lg"
-              className="w-full"
+              className="w-full font-mono"
               onClick={login}
             >
               Login
             </Button>
             {apiError && <span className="error">{apiError}</span>}
             <Text className="mt-1">
-              Already have an account?{" "}
-              <ChakraLink as={Link} to="/">
-                <span className=" text-teal-800 font-bold text-lg">Login</span>
+              Do not have an account?{" "}
+              <ChakraLink as={Link} to="/signup">
+                <span className=" text-teal-800 font-bold text-lg font-mono">Register</span>
               </ChakraLink>
             </Text>
           </form>

@@ -72,4 +72,14 @@ class UserController extends Controller
 
         return response()->json(['user' => $user, 'message' => 'Login status updated successfully']);
     }
+
+    public function getUserData(): \Illuminate\Http\JsonResponse
+    {
+        // Fetch user data from the database
+        $userData = User::select('id', 'name', 'email', 'isTeacher')
+            ->get();
+
+        // Return the user data as JSON response
+        return response()->json($userData);
+    }
 }

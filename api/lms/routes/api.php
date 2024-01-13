@@ -24,5 +24,6 @@ Route::middleware('api')->group(function () {
     Route::post('/register', [UserController::class, 'register']);
     Route::post('/login', [UserController::class, 'login']);
     Route::get('/getTotalUsersCount', [UserController::class, 'getTotalUsersCount']);
+    Route::get('/getUserData', [UserController::class, 'getUserData']);
     Route::put('/updateLoggedInStatus/{userId}/{isLoggedIn}', [UserController::class, 'updateLoggedInStatus']);
 });
