@@ -16,6 +16,7 @@ import {
   Legend,
 } from "recharts";
 import DashboardCard from "../../components/Cards/DashboardCard";
+import {Card} from "react-bootstrap";
 const DashBoardCardData = [
   {
     name: "Total Users",
@@ -47,8 +48,16 @@ const Dashboard = () => {
   // const handleBellClick = () => {
   //   console.log("Bell clicked");
   // };
-  console.log("zafar");
 
+  const chartData = [
+    { name: "January", value: 12 },
+    { name: "February", value: 19 },
+    { name: "March", value: 3 },
+    { name: "April", value: 5 },
+    { name: "May", value: 2 },
+    { name: "June", value: 3 },
+    { name: "July", value: 9 },
+  ];
   const TotalUsersCard = () => {
     const [totalUsers, setTotalUsers] = useState(0);
     const [loadingTotalUsers, setLoadingTotalUsers] = useState(true);
@@ -99,21 +108,34 @@ const Dashboard = () => {
   };
 
   return (
-    <section className="h-screen">
-      <div className="flex py-5 px-2 flex-wrap w-full gap-3">
-      {DashBoardCardData.map((data, index) => (
-        <DashboardCard
-          key={index}
-          name={data.name}
-          number={data.number}
-          action={data.action}
-        />
-      ))}
-      </div>
-      <div>
+      <section className="h-screen">
+        <div className="flex py-5 px-2 flex-wrap w-full gap-3">
+          {DashBoardCardData.map((data, index) => (
+              <DashboardCard
+                  key={index}
+                  name={data.name}
+                  number={data.number}
+                  action={data.action}
+              />
+          ))}
+        </div>
+        <div>
+          <Card className="m-2" style={{maxWidth: '500px'}}>
+            <Card.Title as="h5" className="m-2">User Statistics</Card.Title>
+            <Card.Body>
+              <LineChart width={500} height={300} data={chartData} margin={{top: 5, right: 80, bottom: 5}}>
+                <XAxis dataKey="name"/>
+                <YAxis/>
+                <CartesianGrid strokeDasharray="3 3"/>
+                <Tooltip/>
+                <Legend/>
+                <Line type="monotone" dataKey="value" stroke="blue"/>
+              </LineChart>
+            </Card.Body>
+          </Card>
+        </div>
+      </section>
 
-      </div>
-    </section>
   );
 };
 

@@ -3,9 +3,9 @@ import { SunIcon, RepeatIcon } from "@chakra-ui/icons";
 
 function DashboardCard(props) {
   return (
-    <>
       <Row className="w-72">
         <Col>
+          {/* Card */}
           <Card>
             <Card.Body>
               <Row className="flex justify-center py-3 items-center">
@@ -33,7 +33,6 @@ function DashboardCard(props) {
           </Card>
         </Col>
       </Row>
-    </>
   );
 }
 

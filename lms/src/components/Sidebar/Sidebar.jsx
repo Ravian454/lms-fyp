@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faGlobe,
+  faTachometerAlt,
   faPersonArrowUpFromLine,
-  faPerson,
+  faUser,
+  faUsers,
   faFile,
   faGear,
+  faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 
 function Sidebar() {
@@ -13,20 +15,20 @@ function Sidebar() {
     <div>
       <div className="flex flex-col w-52 border-r h-screen items-start pl-10 fixed top-20  p-4 bg-white-200">
         <Link to="/" className="p-2">
-          <FontAwesomeIcon icon={faGlobe} className="text-gray-400 w-8" /> Dashboard
+          <FontAwesomeIcon icon={faTachometerAlt} className="text-gray-400 w-8" /> Dashboard
         </Link>
         <Link className="p-2">
           <FontAwesomeIcon
-            icon={faPersonArrowUpFromLine}
+            icon={faGraduationCap}
             className="text-gray-400 w-8"
           />
-          Admin
+          Add Course
         </Link>
         <Link to="/profile" className="p-2">
-          <FontAwesomeIcon icon={faPerson} className="text-gray-400 w-8" /> Profile
+          <FontAwesomeIcon icon={faUser} className="text-gray-400 w-8" /> Profile
         </Link>
         <Link to="/user" className="p-2">
-          <FontAwesomeIcon icon={faPerson} className="text-gray-400 w-8" /> User
+          <FontAwesomeIcon icon={faUsers} className="text-gray-400 w-8" /> Students
         </Link>
         <Link className="p-2">
           <FontAwesomeIcon icon={faFile} className="text-gray-400 w-8" /> Files
