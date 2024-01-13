@@ -25,11 +25,11 @@ function Sidebar() {
         <Link to="/profile" className="p-2">
           <FontAwesomeIcon icon={faPerson} className="text-gray-400 w-8" /> Profile
         </Link>
-        <Link to="/user" className="p-2">
-          <FontAwesomeIcon icon={faPerson} className="text-gray-400 w-8" /> User
+        <Link to="/students" className="p-2">
+          <FontAwesomeIcon icon={faPerson} className="text-gray-400 w-8" /> Students
         </Link>
-        <Link className="p-2">
-          <FontAwesomeIcon icon={faFile} className="text-gray-400 w-8" /> Files
+        <Link to="/courses" className="p-2">
+          <FontAwesomeIcon icon={faFile} className="text-gray-400 w-8" /> Add Course
         </Link>
         <Link className="p-2">
           <FontAwesomeIcon icon={faGear} className="text-gray-400 w-8" /> Settings
