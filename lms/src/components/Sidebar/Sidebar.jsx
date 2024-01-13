@@ -30,8 +30,8 @@ function Sidebar() {
         <Link to="/user" className="p-2">
           <FontAwesomeIcon icon={faUsers} className="text-gray-400 w-8" /> Students
         </Link>
-        <Link className="p-2">
-          <FontAwesomeIcon icon={faFile} className="text-gray-400 w-8" /> Files
+        <Link to="/courses" className="p-2">
+          <FontAwesomeIcon icon={faFile} className="text-gray-400 w-8" /> Add Course
         </Link>
         <Link className="p-2">
           <FontAwesomeIcon icon={faGear} className="text-gray-400 w-8" /> Settings

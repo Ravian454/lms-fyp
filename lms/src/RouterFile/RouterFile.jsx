@@ -9,6 +9,8 @@ import BaseComponents from "../components/BaseComponents/BaseComponents";
 // import PasswordChange from "../Pages/PasswordChange/PasswordChange";
 // import { useParams } from "react-router-dom";
 import Profile from "../pages/Profile/Profile";
+import Students from "../pages/Students/Students";
+import Courses from "../pages/Courses/Courses";
 function RouterFile() {
   return (
     <Routes>
@@ -17,6 +19,9 @@ function RouterFile() {
       <Route path="/" element={<BaseComponents />}>
         <Route path="/" element={<Dashboard />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/students" element={<Students />} />
+        <Route path="/courses" element={<Courses />} />
+
         {/* <Route path="/user" element={<User />} />
           <Route path="/profile" element={<Profile />} /> */}
       </Route>
