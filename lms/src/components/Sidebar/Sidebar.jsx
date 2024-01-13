@@ -27,7 +27,7 @@ function Sidebar() {
         <Link to="/profile" className="p-2">
           <FontAwesomeIcon icon={faUser} className="text-gray-400 w-8" /> Profile
         </Link>
-        <Link to="/user" className="p-2">
+        <Link to="/students" className="p-2">
           <FontAwesomeIcon icon={faUsers} className="text-gray-400 w-8" /> Students
         </Link>
         <Link to="/courses" className="p-2">
